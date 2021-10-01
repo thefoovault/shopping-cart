@@ -19,3 +19,10 @@ Go to the `{PROJECT_FOLDER}/docs/endpoints/cart.http` file, and you'll find some
 
 ## What about testing?
 Simply execute `make test` to run all unit and integration tests. Please note this command needs the app to be turned on.
+
+# Endpoints
+
+
+|     Endpoint    | Verb |                                                                             Description                                                                            |
+|:---------------|:----:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| /api/carts   | POST | Creates an empty cart                                                                                                                    |
