@@ -1,0 +1,5 @@
+# Create an empty cart
+POST http://localhost:8000/api/carts
+
+{
+}
