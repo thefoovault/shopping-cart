@@ -3,7 +3,7 @@
   "autoload": {
     "psr-4": {
       "Shared\\": "src/Shared",
-      "SymfonyClient\\": "apps/SymfonyClient/src"
+      "ShoppingCartAPI\\": "apps/ShoppingCartAPI/src"
     }
   },
   "autoload-dev": {
@@ -12,11 +12,11 @@
     }
   },
   "extra": {
-    "bin-dir": "apps/SymfonyClient/bin",
-    "config-dir": "apps/SymfonyClient/config",
-    "src-dir": "apps/SymfonyClient/src",
-    "var-dir": "apps/SymfonyClient/var",
-    "public-dir": "apps/SymfonyClient/public"
+    "bin-dir": "apps/ShoppingCartAPI/bin",
+    "config-dir": "apps/ShoppingCartAPI/config",
+    "src-dir": "apps/ShoppingCartAPI/src",
+    "var-dir": "apps/ShoppingCartAPI/var",
+    "public-dir": "apps/ShoppingCartAPI/public"
   },
   "require": {
     "symfony/flex": "^1.13",
