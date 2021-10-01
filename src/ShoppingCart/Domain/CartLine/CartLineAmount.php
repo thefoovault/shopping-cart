@@ -8,5 +8,4 @@ use Shared\Domain\ValueObject\FloatValueObject;
 
 final class CartLineAmount extends FloatValueObject
 {
-
 }
