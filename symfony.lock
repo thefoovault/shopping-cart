@@ -151,7 +151,7 @@
             "ref": "da0c8be8157600ad34f10ff0c9cc91232522e047"
         },
         "files": [
-            "apps/SymfonyClient/bin/console"
+            "apps/ShoppingCartAPI/bin/console"
         ]
     },
     "symfony/dependency-injection": {
@@ -202,14 +202,14 @@
             "ref": "772b77cfb5017644547ef7f9364c54e4eb9a6c61"
         },
         "files": [
-            "apps/SymfonyClient/config/packages/cache.yaml",
-            "apps/SymfonyClient/config/packages/framework.yaml",
-            "apps/SymfonyClient/config/preload.php",
-            "apps/SymfonyClient/config/routes/framework.yaml",
-            "apps/SymfonyClient/config/services.yaml",
-            "apps/SymfonyClient/public/index.php",
-            "apps/SymfonyClient/src/Controller/.gitignore",
-            "apps/SymfonyClient/src/Kernel.php"
+            "apps/ShoppingCartAPI/config/packages/cache.yaml",
+            "apps/ShoppingCartAPI/config/packages/framework.yaml",
+            "apps/ShoppingCartAPI/config/preload.php",
+            "apps/ShoppingCartAPI/config/routes/framework.yaml",
+            "apps/ShoppingCartAPI/config/services.yaml",
+            "apps/ShoppingCartAPI/public/index.php",
+            "apps/ShoppingCartAPI/src/Controller/.gitignore",
+            "apps/ShoppingCartAPI/src/Kernel.php"
         ]
     },
     "symfony/http-client-contracts": {
@@ -230,7 +230,7 @@
             "ref": "e9a414b113ceadbf4e52abe37bf8f1b443f06ccb"
         },
         "files": [
-            "apps/SymfonyClient/config/packages/messenger.yaml"
+            "apps/ShoppingCartAPI/config/packages/messenger.yaml"
         ]
     },
     "symfony/polyfill-ctype": {
@@ -266,8 +266,8 @@
             "ref": "2d706bd8c6a9e6730343bb22092dabba1f42f4f3"
         },
         "files": [
-            "apps/SymfonyClient/config/packages/routing.yaml",
-            "apps/SymfonyClient/config/routes.yaml"
+            "apps/ShoppingCartAPI/config/packages/routing.yaml",
+            "apps/ShoppingCartAPI/config/routes.yaml"
         ]
     },
     "symfony/runtime": {
