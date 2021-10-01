@@ -1,6 +1,6 @@
 <?php
 
-use SymfonyClient\Kernel;
+use ShoppingCartAPI\Kernel;
 
 require_once dirname(__DIR__).'/../../vendor/autoload_runtime.php';
 
