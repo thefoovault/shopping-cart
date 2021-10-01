@@ -4,19 +4,37 @@ declare(strict_types=1);
 
 namespace ShoppingCartAPI\Controller;
 
+use Shared\Domain\ValueObject\Uuid;
 use Shared\Infrastructure\Symfony\Controller\ApiController;
+use ShoppingCart\Application\CreateCart\CreateCartCommand;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CreateCartController extends ApiController
+final class CreateCartController extends ApiController
 {
+    const API_URL = 'api/carts/%s';
+
     public function __invoke(Request $request): Response
     {
-        return $this->createApiResponse(null);
+        $id = Uuid::random()->value();
+
+        $this->dispatch(
+            new CreateCartCommand($id)
+        );
+
+        return $this->createApiResponse($this->createUrl($id));
     }
 
     protected function exceptions(): array
     {
         return [];
+    }
+
+    private function createUrl(string $id): string
+    {
+        return sprintf(
+            self::API_URL,
+            $id
+        );
     }
 }

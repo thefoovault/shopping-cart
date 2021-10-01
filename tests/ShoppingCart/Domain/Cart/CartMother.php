@@ -32,4 +32,13 @@ final class CartMother
             CartTotalAmountMother::random()
         );
     }
+
+    public static function randomEmptyCart(): Cart
+    {
+        return self::create(
+            CartIdMother::random(),
+            CartLinesMother::create([]),
+            CartTotalAmountMother::create(0)
+        );
+    }
 }
