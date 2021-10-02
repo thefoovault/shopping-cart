@@ -14,4 +14,9 @@ abstract class FloatValueObject
     {
         return $this->value;
     }
+
+    public function add(self $value): self
+    {
+        return new static($value->value() + $this->value());
+    }
 }

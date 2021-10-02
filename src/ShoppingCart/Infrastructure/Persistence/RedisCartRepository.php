@@ -21,8 +21,7 @@ final class RedisCartRepository implements CartRepository
     {
         return new Cart(
             $cartId,
-            new CartLines([]),
-            new CartTotalAmount(0)
+            new CartLines([])
         );
     }
 }

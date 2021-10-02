@@ -21,8 +21,7 @@ final class CreateCart
         $this->cartRepository->save(
             new Cart(
                 $cartId,
-                new CartLines([]),
-                new CartTotalAmount(0)
+                new CartLines([])
             )
         );
     }

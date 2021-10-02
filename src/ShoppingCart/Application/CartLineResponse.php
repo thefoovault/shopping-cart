@@ -21,7 +21,7 @@ final class CartLineResponse implements QueryResponse, \JsonSerializable
         return new self(
             $cartLine->id()->value(),
             ProductResponse::createFromProduct($cartLine->product()),
-            $cartLine->lineQuantity()->value(),
+            $cartLine->quantity()->value(),
             $cartLine->amount()->value()
         );
     }

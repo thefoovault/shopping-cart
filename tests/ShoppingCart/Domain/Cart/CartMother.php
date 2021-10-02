@@ -13,14 +13,12 @@ final class CartMother
 {
     public static function create(
         CartId $cartId,
-        CartLines $cartLines,
-        CartTotalAmount $cartTotalAmount
+        CartLines $cartLines
     ): Cart
     {
         return new Cart(
             $cartId,
-            $cartLines,
-            $cartTotalAmount
+            $cartLines
         );
     }
 
@@ -28,8 +26,7 @@ final class CartMother
     {
         return self::create(
             CartIdMother::random(),
-            CartLinesMother::random(),
-            CartTotalAmountMother::random()
+            CartLinesMother::random()
         );
     }
 
@@ -37,8 +34,15 @@ final class CartMother
     {
         return self::create(
             CartIdMother::random(),
-            CartLinesMother::create([]),
-            CartTotalAmountMother::create(0)
+            CartLinesMother::create([])
+        );
+    }
+
+    public static function fullCart(): Cart
+    {
+        return self::create(
+            CartIdMother::random(),
+            CartLinesMother::fullCartLines()
         );
     }
 }

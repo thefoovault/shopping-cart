@@ -7,3 +7,8 @@ getCart:
     path: /api/carts/{id}
     controller: ShoppingCartAPI\Controller\GetCartController
     methods: [GET]
+
+addProductToCart:
+    path: /api/carts/{id}
+    controller: ShoppingCartAPI\Controller\AddProductToCartController
+    methods: [POST]
