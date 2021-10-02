@@ -16,15 +16,13 @@ final class CartLineMother
     public static function create(
         CartLineId $cartLineId,
         Product $product,
-        CartLineQuantity $cartLineQuantity,
-        CartLineAmount $cartLineAmount
+        CartLineQuantity $cartLineQuantity
     ): CartLine
     {
         return new CartLine(
             $cartLineId,
             $product,
-            $cartLineQuantity,
-            $cartLineAmount
+            $cartLineQuantity
         );
     }
 
@@ -33,8 +31,7 @@ final class CartLineMother
         return self::create(
             CartLineIdMother::random(),
             ProductMother::random(),
-            CartLineQuantityMother::random(),
-            CartLineAmountMother::random()
+            CartLineQuantityMother::random()
         );
     }
 }

@@ -14,4 +14,9 @@ abstract class StringValueObject
     {
         return $this->value;
     }
+
+    public function equals(self $value): bool
+    {
+        return $value->value() === $this->value();
+    }
 }

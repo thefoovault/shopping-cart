@@ -14,4 +14,9 @@ abstract class IntegerValueObject
     {
         return $this->value;
     }
+
+    public function add(self $value): static
+    {
+        return new static($value->value() + $this->value());
+    }
 }

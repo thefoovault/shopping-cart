@@ -15,7 +15,7 @@ class Uuid extends StringValueObject
         parent::__construct($value);
     }
 
-    public static function random(): self
+    public static function random(): static
     {
         return new static(RamseyUuid::uuid4()->toString());
     }

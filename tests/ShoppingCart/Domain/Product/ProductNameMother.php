@@ -16,6 +16,6 @@ final class ProductNameMother
 
     public static function random(): ProductName
     {
-        return self::create(Factory::create()->title());
+        return self::create(Factory::create()->text(50));
     }
 }
