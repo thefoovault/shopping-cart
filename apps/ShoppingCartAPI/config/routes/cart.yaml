@@ -12,3 +12,8 @@ addProductToCart:
     path: /api/carts/{id}
     controller: ShoppingCartAPI\Controller\AddProductToCartController
     methods: [POST]
+
+deleteCart:
+    path: /api/carts/{id}
+    controller: ShoppingCartAPI\Controller\DeleteCartController
+    methods: [DELETE]
