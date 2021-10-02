@@ -11,8 +11,6 @@ use ShoppingCart\Application\AddProductToCart\AddProductToCartCommandHandler;
 use ShoppingCart\Domain\Cart\CartRepository;
 use ShoppingCart\Domain\Cart\Exception\FullCart;
 use ShoppingCart\Domain\Product\ProductRepository;
-use Test\ShoppingCart\Domain\Cart\CartIdMother;
-use Test\ShoppingCart\Domain\Cart\CartLinesMother;
 use Test\ShoppingCart\Domain\Cart\CartMother;
 use Test\ShoppingCart\Domain\CartLine\CartLineMother;
 

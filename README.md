@@ -27,3 +27,4 @@ Simply execute `make test` to run all unit and integration tests. Please note th
 |:---------------|:----:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | /api/carts   | POST | Creates an empty cart                                                                                                                    |
 | /api/carts{id}   | GET | Gets a cart                                                                                                                    |
+| /api/carts{id}   | POST | Adds a product to a specific cart                                                                                                                    |
