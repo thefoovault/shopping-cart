@@ -17,11 +17,16 @@ final class RedisCartRepository implements CartRepository
         // TODO: Implement save() method.
     }
 
-    public function findById(CartId $cartId): Cart
+    public function findById(CartId $cartId): ?Cart
     {
         return new Cart(
             $cartId,
             new CartLines([])
         );
+    }
+
+    public function delete(CartId $cartId): void
+    {
+        // TODO: Implement delete() method.
     }
 }
