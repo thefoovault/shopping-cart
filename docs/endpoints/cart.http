@@ -3,3 +3,9 @@ POST http://localhost:8000/api/carts
 
 {
 }
+
+
+###
+# Get a cart
+GET http://localhost:8000/api/carts/489ccdf6-0631-446c-b1c6-8eff1d0e98d2
+
