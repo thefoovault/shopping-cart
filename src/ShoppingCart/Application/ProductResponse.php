@@ -7,7 +7,7 @@ namespace ShoppingCart\Application;
 use Shared\Domain\Bus\Query\QueryResponse;
 use ShoppingCart\Domain\Product\Product;
 
-final class ProductResponse implements QueryResponse, \JsonSerializable
+final class ProductResponse implements QueryResponse
 {
     public function __construct(
         private string $id,
@@ -37,14 +37,5 @@ final class ProductResponse implements QueryResponse, \JsonSerializable
     public function unitPrice(): float
     {
         return $this->unitPrice;
-    }
-
-    public function jsonSerialize(): array
-    {
-        return [
-            'id' => $this->id(),
-            'name' => $this->name(),
-            'unitPrice' => $this->unitPrice()
-        ];
     }
 }

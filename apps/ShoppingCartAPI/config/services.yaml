@@ -34,6 +34,12 @@ services:
             - scheme: '%env(REDIS_SCHEME)%'
               host: '%env(REDIS_HOST)%'
               port: '%env(REDIS_PORT)%'
+
+    # Tells the serializer which normalizer use
+    property_normalizer:
+        class: Symfony\Component\Serializer\Normalizer\PropertyNormalizer
+        tags:
+            - { name: serializer.normalizer }
 framework:
     messenger:
         default_bus: command.bus

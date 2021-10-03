@@ -17,6 +17,12 @@ framework:
     php_errors:
         log: true
 
+    # Enables serialize
+    serializer:
+        enabled: true
+    property_access:
+        enabled: true
+
 when@test:
     framework:
         test: true
