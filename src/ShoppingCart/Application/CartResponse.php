@@ -8,7 +8,7 @@ use Shared\Domain\Bus\Query\QueryResponse;
 use ShoppingCart\Domain\Cart\Cart;
 use ShoppingCart\Domain\Cart\CartLines;
 
-final class CartResponse implements QueryResponse, \JsonSerializable
+final class CartResponse implements QueryResponse
 {
     public function __construct(
         private string $id,
@@ -48,14 +48,5 @@ final class CartResponse implements QueryResponse, \JsonSerializable
     public function totalAmount(): float
     {
         return $this->totalAmount;
-    }
-
-    public function jsonSerialize()
-    {
-        return [
-            'id' => $this->id(),
-            'cartLines' => $this->cartLines(),
-            'totalAmount' => $this->totalAmount()
-        ];
     }
 }

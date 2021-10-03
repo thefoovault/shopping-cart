@@ -45,4 +45,12 @@ final class CartMother
             CartLinesMother::fullCartLines()
         );
     }
+
+    public static function withKey(CartId $cartId): Cart
+    {
+        return self::create(
+            $cartId,
+            CartLinesMother::random()
+        );
+    }
 }

@@ -6,6 +6,9 @@ namespace Shared\Infrastructure\Symfony\Controller;
 
 use Shared\Domain\Bus\Command\CommandBus;
 use Shared\Domain\Bus\Query\QueryBus;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\SerializerInterface;
 use function Lambdish\Phunctional\each;
 
 abstract class ApiController extends Controller
@@ -13,6 +16,7 @@ abstract class ApiController extends Controller
     public function __construct(
         protected QueryBus $queryBus,
         protected CommandBus $commandBus,
+        protected SerializerInterface $serializer,
         ApiExceptionsHttpStatusCodeMapping $exceptionHandler
     ) {
         parent::__construct($this->queryBus, $this->commandBus);
@@ -23,4 +27,20 @@ abstract class ApiController extends Controller
     }
 
     abstract protected function exceptions(): array;
+
+    protected function createApiResponse(mixed $data, int $status_code = Response::HTTP_OK): Response
+    {
+        return new Response(
+            $this->serialize($data),
+            $status_code,
+            [
+                'Content-Type' => 'application/json',
+            ]
+        );
+    }
+
+    private function serialize(mixed $data): string
+    {
+        return $this->serializer->serialize($data, JsonEncoder::FORMAT);
+    }
 }

@@ -34,15 +34,4 @@ abstract class Controller extends AbstractController
     {
         return json_decode($request->getContent(), true);
     }
-
-    protected function createApiResponse(mixed $data, int $status_code = Response::HTTP_OK): Response
-    {
-        return new Response(
-            json_encode($data),
-            $status_code,
-            [
-                'Content-Type' => 'application/json',
-            ]
-        );
-    }
 }

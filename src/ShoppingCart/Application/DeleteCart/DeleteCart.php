@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace ShoppingCart\Application\DeleteCart;
 
-use ShoppingCart\Domain\Cart\Cart;
+use ShoppingCart\Application\Assertion;
 use ShoppingCart\Domain\Cart\CartId;
 use ShoppingCart\Domain\Cart\CartRepository;
-use ShoppingCart\Domain\Cart\Exception\CartNotFound;
 
 final class DeleteCart
 {
+    use Assertion;
+
     public function __construct(
         private CartRepository $cartRepository
     ) {}
@@ -22,12 +23,5 @@ final class DeleteCart
         $this->assertCartExists($cart, $cartId);
 
         $this->cartRepository->delete($cartId);
-    }
-
-    private function assertCartExists(?Cart $cart, CartId $cartId): void
-    {
-        if (null === $cart) {
-            throw new CartNotFound($cartId);
-        }
     }
 }

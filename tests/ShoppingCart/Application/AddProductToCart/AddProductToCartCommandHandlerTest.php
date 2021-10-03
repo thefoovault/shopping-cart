@@ -9,7 +9,9 @@ use ShoppingCart\Application\AddProductToCart\AddProductToCart;
 use ShoppingCart\Application\AddProductToCart\AddProductToCartCommand;
 use ShoppingCart\Application\AddProductToCart\AddProductToCartCommandHandler;
 use ShoppingCart\Domain\Cart\CartRepository;
+use ShoppingCart\Domain\Cart\Exception\CartNotFound;
 use ShoppingCart\Domain\Cart\Exception\FullCart;
+use ShoppingCart\Domain\Product\Exception\ProductNotFound;
 use ShoppingCart\Domain\Product\ProductRepository;
 use Test\ShoppingCart\Domain\Cart\CartMother;
 use Test\ShoppingCart\Domain\CartLine\CartLineMother;
@@ -59,6 +61,58 @@ final class AddProductToCartCommandHandlerTest extends TestCase
         $this->cartRepository
             ->expects(self::once())
             ->method('save');
+
+        $this->addProductToCartCommandHandler->__invoke(
+            new AddProductToCartCommand(
+                $cart->id()->value(),
+                $cartLine->product()->id()->value(),
+                $cartLine->quantity()->value()
+            )
+        );
+    }
+
+    /** @test */
+    public function shouldThrowCartNotFoundException(): void
+    {
+        $this->expectException(CartNotFound::class);
+
+        $cart = CartMother::fullCart();
+        $cartLine = CartLineMother::random();
+
+        $this->cartRepository
+            ->expects(self::once())
+            ->method('findById')
+            ->with($cart->id())
+            ->willReturn(null);
+
+        $this->addProductToCartCommandHandler->__invoke(
+            new AddProductToCartCommand(
+                $cart->id()->value(),
+                $cartLine->product()->id()->value(),
+                $cartLine->quantity()->value()
+            )
+        );
+    }
+
+    /** @test */
+    public function shouldThrowProductNotFoundException(): void
+    {
+        $this->expectException(ProductNotFound::class);
+
+        $cart = CartMother::fullCart();
+        $cartLine = CartLineMother::random();
+
+        $this->cartRepository
+            ->expects(self::once())
+            ->method('findById')
+            ->with($cart->id())
+            ->willReturn($cart);
+
+        $this->productRepository
+            ->expects(self::once())
+            ->method('findById')
+            ->with($cartLine->product()->id())
+            ->willReturn(null);
 
         $this->addProductToCartCommandHandler->__invoke(
             new AddProductToCartCommand(
