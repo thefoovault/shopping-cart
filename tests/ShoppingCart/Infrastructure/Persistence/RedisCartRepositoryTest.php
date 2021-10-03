@@ -8,7 +8,7 @@ use ShoppingCart\Domain\Cart\Cart;
 use ShoppingCart\Domain\Cart\CartId;
 use ShoppingCart\Infrastructure\Persistence\RedisCartRepository;
 use Test\ShoppingCart\Domain\Cart\CartMother;
-use Test\ShoppingCart\RedisTestCase;
+use Test\RedisTestCase;
 
 final class RedisCartRepositoryTest extends RedisTestCase
 {

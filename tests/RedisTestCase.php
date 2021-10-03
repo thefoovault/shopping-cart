@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Test\ShoppingCart;
+namespace Test;
 
 use Predis\Client;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
