@@ -37,6 +37,12 @@ final class CartLine
         $this->amount =$this->calculateLineAmount($this->quantity, $this->product()->price());
     }
 
+    public function changeQuantity(CartLineQuantity $lineQuantity): void
+    {
+        $this->quantity = $lineQuantity;
+        $this->amount = $this->calculateLineAmount($this->quantity, $this->product->price());
+    }
+
     public function id(): CartLineId
     {
         return $this->id;
