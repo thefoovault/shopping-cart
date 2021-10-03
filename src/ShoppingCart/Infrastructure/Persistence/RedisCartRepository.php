@@ -21,6 +21,8 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 final class RedisCartRepository implements CartRepository
 {
+    private const DEFAULT_TTL = 60 * 60 * 24;
+
     public function __construct(
         private Client $connection,
         private SerializerInterface $serializer
@@ -30,7 +32,9 @@ final class RedisCartRepository implements CartRepository
     {
         $this->connection->set(
             $cart->id()->value(),
-            $this->serializer->serialize($cart, JsonEncoder::FORMAT)
+            $this->serializer->serialize($cart, JsonEncoder::FORMAT),
+            'EX',
+            self::DEFAULT_TTL
         );
     }
 
@@ -41,6 +45,8 @@ final class RedisCartRepository implements CartRepository
         if (null === $data) {
             return null;
         }
+
+        $this->connection->expire($cartId->value(), self::DEFAULT_TTL);
 
         return $this->hydrateCart(json_decode($data, true));
     }
