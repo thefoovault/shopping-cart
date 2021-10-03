@@ -24,7 +24,7 @@ final class AddProductToCartController extends ApiController
             )
         );
 
-        return $this->createApiResponse(null);
+        return $this->createApiResponse(null, Response::HTTP_NO_CONTENT);
     }
 
     protected function exceptions(): array

@@ -7,7 +7,6 @@ namespace ShoppingCart\Infrastructure\Persistence;
 use Predis\Client;
 use ShoppingCart\Domain\Cart\Cart;
 use ShoppingCart\Domain\Cart\CartId;
-use ShoppingCart\Domain\Cart\CartLines;
 use ShoppingCart\Domain\Cart\CartRepository;
 
 final class RedisCartRepository implements CartRepository
