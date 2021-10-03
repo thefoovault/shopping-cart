@@ -20,7 +20,7 @@ final class DeleteCartController extends ApiController
             new DeleteCartCommand($id)
         );
 
-        return $this->createApiResponse(null);
+        return $this->createApiResponse(null, Response::HTTP_NO_CONTENT);
     }
 
     protected function exceptions(): array
