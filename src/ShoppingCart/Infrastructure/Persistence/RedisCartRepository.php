@@ -22,6 +22,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 final class RedisCartRepository implements CartRepository
 {
     private const DEFAULT_TTL = 60 * 60 * 24;
+    private const REDIS_CART_KEY = 'cart:id:';
 
     public function __construct(
         private Client $connection,
@@ -31,7 +32,7 @@ final class RedisCartRepository implements CartRepository
     public function save(Cart $cart): void
     {
         $this->connection->set(
-            $cart->id()->value(),
+            self::REDIS_CART_KEY . $cart->id()->value(),
             $this->serializer->serialize($cart, JsonEncoder::FORMAT),
             'EX',
             self::DEFAULT_TTL
@@ -40,13 +41,13 @@ final class RedisCartRepository implements CartRepository
 
     public function findById(CartId $cartId): ?Cart
     {
-        $data = $this->connection->get($cartId->value());
+        $data = $this->connection->get(self::REDIS_CART_KEY . $cartId->value());
 
         if (null === $data) {
             return null;
         }
 
-        $this->connection->expire($cartId->value(), self::DEFAULT_TTL);
+        $this->connection->expire(self::REDIS_CART_KEY . $cartId->value(), self::DEFAULT_TTL);
 
         return $this->hydrateCart(json_decode($data, true));
     }
@@ -89,6 +90,6 @@ final class RedisCartRepository implements CartRepository
 
     public function delete(CartId $cartId): void
     {
-        $this->connection->del($cartId->value());
+        $this->connection->del(self::REDIS_CART_KEY . $cartId->value());
     }
 }
