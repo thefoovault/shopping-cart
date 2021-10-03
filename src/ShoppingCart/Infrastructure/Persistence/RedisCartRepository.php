@@ -4,29 +4,39 @@ declare(strict_types=1);
 
 namespace ShoppingCart\Infrastructure\Persistence;
 
+use Predis\Client;
 use ShoppingCart\Domain\Cart\Cart;
 use ShoppingCart\Domain\Cart\CartId;
 use ShoppingCart\Domain\Cart\CartLines;
 use ShoppingCart\Domain\Cart\CartRepository;
-use ShoppingCart\Domain\Cart\CartTotalAmount;
 
 final class RedisCartRepository implements CartRepository
 {
+    public function __construct(
+        private Client $connection
+    ) {}
+
     public function save(Cart $cart): void
     {
-        // TODO: Implement save() method.
+        $this->connection->set(
+            $cart->id()->value(),
+            serialize($cart)
+        );
     }
 
     public function findById(CartId $cartId): ?Cart
     {
-        return new Cart(
-            $cartId,
-            new CartLines([])
-        );
+        $data = $this->connection->get($cartId->value());
+
+        if (null === $data) {
+            return null;
+        }
+
+        return unserialize($data);
     }
 
     public function delete(CartId $cartId): void
     {
-        // TODO: Implement delete() method.
+        $this->connection->del($cartId->value());
     }
 }
