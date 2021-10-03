@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace ShoppingCart\Application\ChangeCartProductQuantity;
 
-use ShoppingCart\Domain\Cart\Cart;
+use ShoppingCart\Application\Assertion;
 use ShoppingCart\Domain\Cart\CartId;
 use ShoppingCart\Domain\Cart\CartRepository;
-use ShoppingCart\Domain\Cart\Exception\CartNotFound;
 use ShoppingCart\Domain\CartLine\CartLineQuantity;
 use ShoppingCart\Domain\Product\ProductId;
 
 final class ChangeCartProductQuantity
 {
+    use Assertion;
+
     public function __construct(
         private CartRepository $cartRepository
     ) {}
@@ -26,12 +27,5 @@ final class ChangeCartProductQuantity
         $cart->changeProductQuantity($productId, $cartLineQuantity);
 
         $this->cartRepository->save($cart);
-    }
-
-    private function assertCartExists(?Cart $cart, CartId $cartId): void
-    {
-        if (null === $cart) {
-            throw new CartNotFound($cartId);
-        }
     }
 }

@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace ShoppingCart\Application\GetCart;
 
+use ShoppingCart\Application\Assertion;
 use ShoppingCart\Domain\Cart\Cart;
 use ShoppingCart\Domain\Cart\CartId;
 use ShoppingCart\Domain\Cart\CartRepository;
-use ShoppingCart\Domain\Cart\Exception\CartNotFound;
 
 final class GetCart
 {
+    use Assertion;
+
     public function __construct(
         private CartRepository $cartRepository
     ) {}
@@ -22,12 +24,5 @@ final class GetCart
         $this->assertCartExists($cart, $cartId);
 
         return $cart;
-    }
-
-    private function assertCartExists(?Cart $cart, CartId $cartId): void
-    {
-        if (null === $cart) {
-            throw new CartNotFound($cartId);
-        }
     }
 }
