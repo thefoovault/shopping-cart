@@ -31,10 +31,9 @@ final class CartLine
         );
     }
 
-    public function incrementLineQuantity(CartLineQuantity $lineQuantity): void
+    public function incrementLineQuantity(CartLineQuantity $lineQuantity): CartLineQuantity
     {
-        $this->quantity = $this->quantity()->add($lineQuantity);
-        $this->amount =$this->calculateLineAmount($this->quantity, $this->product()->price());
+        return $this->quantity()->add($lineQuantity);
     }
 
     public function changeQuantity(CartLineQuantity $lineQuantity): void
