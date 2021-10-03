@@ -1,34 +1,31 @@
 # Create an empty cart
-POST http://localhost:8000/api/carts
+POST {{url}}/api/carts
 
 {
 }
 
-
 ###
 # Get a cart
-GET http://localhost:8000/api/carts/{{cartId}}
-
+GET {{url}}/api/carts/{{cartId}}
 
 ###
 # Add a product to a cart
-POST http://localhost:8000/api/carts/{{cartId}}
+POST {{url}}/api/carts/{{cartId}}
 
 {
   "productId": "{{productId}}",
   "productQuantity": 2
 }
 
-
-###
-# Delete a cart
-DELETE http://localhost:8000/api/carts/{{cartId}}
-
-
 ###
 # Change cart line quantity
-PATCH http://localhost:8000/api/carts/{{cartId}}/items/{{productId}}
+PATCH {{url}}/api/carts/{{cartId}}/items/{{productId}}
 
 {
   "productQuantity": 3
 }
+
+###
+# Delete a cart
+DELETE {{url}}/api/carts/{{cartId}}
+

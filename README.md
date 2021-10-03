@@ -22,7 +22,6 @@ Simply execute `make test` to run all unit and integration tests. Please note th
 
 # Endpoints
 
-
 |     Endpoint    | Verb |                                                                             Description                                                                            |
 |:---------------|:----:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | /api/carts   | POST | Creates an empty cart                                                                                                                    |
