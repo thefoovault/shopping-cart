@@ -28,7 +28,7 @@ final class GetCartController extends ApiController
     {
         return [
             CartNotFound::class => Response::HTTP_NOT_FOUND,
-            InvalidUuid::class => Response::HTTP_BAD_REQUEST
+            InvalidUuid::class => Response::HTTP_BAD_REQUEST,
         ];
     }
 }
