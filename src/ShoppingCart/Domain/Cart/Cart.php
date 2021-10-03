@@ -6,9 +6,11 @@ namespace ShoppingCart\Domain\Cart;
 
 use Shared\Domain\Aggregate\AggregateRoot;
 use ShoppingCart\Domain\Cart\Exception\FullCart;
+use ShoppingCart\Domain\Cart\Exception\ProductNotFoundInCart;
 use ShoppingCart\Domain\CartLine\CartLine;
 use ShoppingCart\Domain\CartLine\CartLineQuantity;
 use ShoppingCart\Domain\Product\Product;
+use ShoppingCart\Domain\Product\ProductId;
 
 final class Cart extends AggregateRoot
 {
@@ -34,6 +36,19 @@ final class Cart extends AggregateRoot
         } else {
             $cartLine->incrementLineQuantity($lineQuantity);
         }
+
+        $this->totalAmount = $this->calculateTotalAmount();
+    }
+
+    public function changeProductQuantity(ProductId $productId, CartLineQuantity $cartLineQuantity): void
+    {
+        $cartLine = $this->cartLines()->findLineByProductId($productId);
+
+        if (null === $cartLine) {
+            throw new ProductNotFoundInCart($this->id(), $productId);
+        }
+
+        $cartLine->changeQuantity($cartLineQuantity);
 
         $this->totalAmount = $this->calculateTotalAmount();
     }

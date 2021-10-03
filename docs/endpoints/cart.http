@@ -7,19 +7,28 @@ POST http://localhost:8000/api/carts
 
 ###
 # Get a cart
-GET http://localhost:8000/api/carts/489ccdf6-0631-446c-b1c6-8eff1d0e98d2
+GET http://localhost:8000/api/carts/{{cartId}}
 
 
 ###
-# Adds a product to a cart
-POST http://localhost:8000/api/carts/489ccdf6-0631-446c-b1c6-8eff1d0e98d2
+# Add a product to a cart
+POST http://localhost:8000/api/carts/{{cartId}}
 
 {
-  "productId": "7e5070c0-e287-4cab-b267-0d399665aac6",
+  "productId": "{{productId}}",
   "productQuantity": 2
 }
 
 
 ###
 # Delete a cart
-DELETE http://localhost:8000/api/carts/489ccdf6-0631-446c-b1c6-8eff1d0e98d2
+DELETE http://localhost:8000/api/carts/{{cartId}}
+
+
+###
+# Change cart line quantity
+PATCH http://localhost:8000/api/carts/{{cartId}}/items/{{productId}}
+
+{
+  "productQuantity": 3
+}
