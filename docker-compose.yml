@@ -23,3 +23,21 @@ services:
       - ./apps/ShoppingCartAPI/public/:/app/apps/ShoppingCartAPI/public
     depends_on:
       - php_container
+
+  redis_container:
+    image: redis
+    ports:
+      - ${REDIS_PORT}:6379
+    expose:
+      - 6379
+    volumes:
+      - ./var/redis:/data/redis
+
+  redisinsight:
+    image: redislabs/redisinsight:latest
+    ports:
+      - '8001:8001'
+    volumes:
+      - ./var/redisinsight:/db
+    depends_on:
+      - redis_container
