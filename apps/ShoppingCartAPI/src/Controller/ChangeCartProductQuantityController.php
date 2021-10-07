@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace ShoppingCartAPI\Controller;
 
 use Shared\Infrastructure\Symfony\Controller\ApiController;
-use Store\Application\ChangeCartProductQuantity\ChangeCartProductQuantityCommand;
-use Store\Domain\Cart\Exception\CartNotFound;
-use Store\Domain\Cart\Exception\ProductNotFoundInCart;
-use Store\Domain\CartLine\Exception\InvalidQuantity;
+use Store\ShoppingCart\Application\ChangeCartProductQuantity\ChangeCartProductQuantityCommand;
+use Store\ShoppingCart\Domain\Cart\Exception\CartNotFound;
+use Store\ShoppingCart\Domain\Cart\Exception\ProductNotFoundInCart;
+use Store\ShoppingCart\Domain\CartLine\Exception\InvalidQuantity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
