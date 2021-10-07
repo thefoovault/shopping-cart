@@ -2,7 +2,7 @@
   "name": "thefoovault/sf-skeleton",
   "autoload": {
     "psr-4": {
-      "ShoppingCart\\": "src/ShoppingCart",
+      "Store\\": "src/Store",
       "Shared\\": "src/Shared",
       "ShoppingCartAPI\\": "apps/ShoppingCartAPI/src"
     }

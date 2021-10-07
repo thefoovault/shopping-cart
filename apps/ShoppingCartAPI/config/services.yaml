@@ -10,8 +10,8 @@ services:
         resource: '../src/'
     Shared\:
         resource: '../../../src/Shared/'
-    ShoppingCart\:
-        resource: '../../../src/ShoppingCart/'
+    Store\:
+        resource: '../../../src/Store/'
 
     Shared\Infrastructure\Symfony\Bus\Query\SymfonyQueryBus:
         arguments:

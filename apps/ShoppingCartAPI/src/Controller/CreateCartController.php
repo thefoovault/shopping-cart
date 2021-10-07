@@ -6,7 +6,7 @@ namespace ShoppingCartAPI\Controller;
 
 use Shared\Domain\ValueObject\Uuid;
 use Shared\Infrastructure\Symfony\Controller\ApiController;
-use ShoppingCart\Application\CreateCart\CreateCartCommand;
+use Store\Application\CreateCart\CreateCartCommand;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

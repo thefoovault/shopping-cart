@@ -6,8 +6,8 @@ namespace ShoppingCartAPI\Controller;
 
 use Shared\Domain\Exception\InvalidUuid;
 use Shared\Infrastructure\Symfony\Controller\ApiController;
-use ShoppingCart\Application\GetCart\GetCartQuery;
-use ShoppingCart\Domain\Cart\Exception\CartNotFound;
+use Store\Application\GetCart\GetCartQuery;
+use Store\Domain\Cart\Exception\CartNotFound;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
