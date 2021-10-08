@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Store\ShoppingCart\Application;
+namespace Shared\Application;
 
 use Store\ShoppingCart\Domain\Cart\Cart;
 use Store\ShoppingCart\Domain\Cart\CartId;
@@ -11,7 +11,7 @@ use Store\ShoppingCart\Domain\Product\Exception\ProductNotFound;
 use Store\ShoppingCart\Domain\Product\Product;
 use Store\ShoppingCart\Domain\Product\ProductId;
 
-trait Assertion
+trait AssertionTrait
 {
     private function assertCartExists(?Cart $cart, CartId $cartId): void
     {

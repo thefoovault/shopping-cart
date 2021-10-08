@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Store\ShoppingCart\Application\ChangeCartProductQuantity;
 
-use Store\ShoppingCart\Application\Assertion;
+use Shared\Application\AssertionTrait;
 use Store\ShoppingCart\Domain\Cart\CartId;
 use Store\ShoppingCart\Domain\Cart\CartRepository;
 use Store\ShoppingCart\Domain\CartLine\CartLineQuantity;
@@ -12,7 +12,7 @@ use Store\ShoppingCart\Domain\Product\ProductId;
 
 final class ChangeCartProductQuantity
 {
-    use Assertion;
+    use AssertionTrait;
 
     public function __construct(
         private CartRepository $cartRepository

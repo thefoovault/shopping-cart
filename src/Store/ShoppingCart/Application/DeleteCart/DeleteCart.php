@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Store\ShoppingCart\Application\DeleteCart;
 
-use Store\ShoppingCart\Application\Assertion;
+use Shared\Application\AssertionTrait;
 use Store\ShoppingCart\Domain\Cart\CartId;
 use Store\ShoppingCart\Domain\Cart\CartRepository;
 
 final class DeleteCart
 {
-    use Assertion;
+    use AssertionTrait;
 
     public function __construct(
         private CartRepository $cartRepository
