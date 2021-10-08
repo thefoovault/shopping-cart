@@ -16,6 +16,6 @@ final class CartLineQuantityMother
 
     public static function random(): CartLineQuantity
     {
-        return self::create(Factory::create()->biasedNumberBetween(1,15));
+        return self::create(Factory::create()->numberBetween(1,15));
     }
 }
