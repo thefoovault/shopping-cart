@@ -22,7 +22,8 @@ final class Order extends AggregateRoot
         private OrderId $id,
         private UserId $userId,
         private OrderStatus $status,
-        private OrderLines $orderLines
+        private OrderLines $orderLines,
+        private OrderCreationDate $creationDate
     ) {
         $this->totalAmount = $this->calculateTotalAmount();
     }
@@ -35,7 +36,8 @@ final class Order extends AggregateRoot
             OrderId::random(),
             $cart->userId(),
             OrderStatus::createWithPendingStatus(),
-            self::createFromCartLines($cart->cartLines())
+            self::createFromCartLines($cart->cartLines()),
+            OrderCreationDate::now()
         );
     }
 
@@ -87,6 +89,11 @@ final class Order extends AggregateRoot
     public function orderLines(): OrderLines
     {
         return $this->orderLines;
+    }
+
+    public function creationDate(): OrderCreationDate
+    {
+        return $this->creationDate;
     }
 
     private function calculateTotalAmount(): OrderTotalAmount
