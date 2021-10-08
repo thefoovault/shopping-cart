@@ -22,3 +22,8 @@ changeCartProductQuantity:
     path: /api/carts/{id}/items/{productId}
     controller: ShoppingCartAPI\Controller\ChangeCartProductQuantityController
     methods: [PATCH]
+
+checkoutCart:
+    path: /api/carts/{id}/checkout
+    controller: ShoppingCartAPI\Controller\CheckoutCartController
+    methods: [POST]
