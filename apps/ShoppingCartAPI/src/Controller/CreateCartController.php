@@ -22,7 +22,7 @@ final class CreateCartController extends ApiController
             new CreateCartCommand($id)
         );
 
-        return $this->createApiResponse($this->createUrl($id));
+        return $this->createApiResponse($this->createUrl($id), Response::HTTP_CREATED);
     }
 
     protected function exceptions(): array
