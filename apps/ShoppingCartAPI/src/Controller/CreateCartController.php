@@ -17,9 +17,10 @@ final class CreateCartController extends ApiController
     public function __invoke(Request $request): Response
     {
         $id = Uuid::random()->value();
+        $payload = $this->getPayload($request);
 
         $this->dispatch(
-            new CreateCartCommand($id)
+            new CreateCartCommand($id, $payload['userId'])
         );
 
         return $this->createApiResponse($this->createUrl($id), Response::HTTP_CREATED);

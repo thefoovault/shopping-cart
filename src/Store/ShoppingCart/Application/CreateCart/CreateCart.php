@@ -9,6 +9,7 @@ use Store\ShoppingCart\Domain\Cart\CartId;
 use Store\ShoppingCart\Domain\Cart\CartLines;
 use Store\ShoppingCart\Domain\Cart\CartRepository;
 use Store\ShoppingCart\Domain\Cart\CartTotalAmount;
+use Store\Users\Domain\User\UserId;
 
 final class CreateCart
 {
@@ -16,12 +17,13 @@ final class CreateCart
         private CartRepository $cartRepository
     ) {}
 
-    public function __invoke(CartId $cartId): void
+    public function __invoke(CartId $cartId, ?UserId $userId = null): void
     {
         $this->cartRepository->save(
             new Cart(
                 $cartId,
-                new CartLines([])
+                new CartLines([]),
+                $userId
             )
         );
     }

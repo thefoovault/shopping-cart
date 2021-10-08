@@ -11,6 +11,7 @@ use Store\ShoppingCart\Domain\CartLine\CartLine;
 use Store\ShoppingCart\Domain\CartLine\CartLineQuantity;
 use Store\ShoppingCart\Domain\Product\Product;
 use Store\ShoppingCart\Domain\Product\ProductId;
+use Store\Users\Domain\User\UserId;
 
 final class Cart extends AggregateRoot
 {
@@ -20,7 +21,8 @@ final class Cart extends AggregateRoot
 
     public function __construct(
         private CartId $id,
-        private CartLines $cartLines
+        private CartLines $cartLines,
+        private ?UserId $userId = null
     ) {
         $this->totalAmount = $this->calculateTotalAmount();
     }
@@ -63,6 +65,11 @@ final class Cart extends AggregateRoot
     public function cartLines(): CartLines
     {
         return $this->cartLines;
+    }
+
+    public function userId(): ?UserId
+    {
+        return $this->userId;
     }
 
     public function totalAmount(): CartTotalAmount

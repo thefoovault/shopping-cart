@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace Store\Accounting\Domain\Order;
 
 use Shared\Domain\Aggregate\AggregateRoot;
+use Store\Accounting\Domain\Order\Exception\OrderEmptyUser;
 use Store\Accounting\Domain\OrderLine\OrderLine;
 use Store\Accounting\Domain\OrderLine\OrderLineQuantity;
 use Store\Accounting\Domain\OrderLine\OrderLineUnitPrice;
 use Store\ShoppingCart\Domain\Cart\Cart;
 use Store\ShoppingCart\Domain\Cart\CartLines;
 use Store\ShoppingCart\Domain\CartLine\CartLine;
+use Store\Users\Domain\User\UserId;
 
 final class Order extends AggregateRoot
 {
@@ -18,7 +20,7 @@ final class Order extends AggregateRoot
 
     public function __construct(
         private OrderId $id,
-        private OrderUserId $userId,
+        private UserId $userId,
         private OrderStatus $status,
         private OrderLines $orderLines
     ) {
@@ -27,12 +29,21 @@ final class Order extends AggregateRoot
 
     public static function createFromCart(Cart $cart): self
     {
+        self::assertExistingUser($cart->userId());
+
         return new self(
             OrderId::random(),
-            OrderUserId::random(),
+            $cart->userId(),
             OrderStatus::createWithPendingStatus(),
             self::createFromCartLines($cart->cartLines())
         );
+    }
+
+    private static function assertExistingUser(?UserId $userId): void
+    {
+        if (null === $userId) {
+            throw new OrderEmptyUser();
+        }
     }
 
     private static function createFromCartLines(CartLines $cartLines): OrderLines
@@ -58,7 +69,7 @@ final class Order extends AggregateRoot
         return $this->id;
     }
 
-    public function userId(): OrderUserId
+    public function userId(): UserId
     {
         return $this->userId;
     }

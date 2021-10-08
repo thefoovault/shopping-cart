@@ -16,6 +16,7 @@ use Store\ShoppingCart\Domain\Product\Product;
 use Store\ShoppingCart\Domain\Product\ProductId;
 use Store\ShoppingCart\Domain\Product\ProductName;
 use Store\ShoppingCart\Domain\Product\ProductPrice;
+use Store\Users\Domain\User\UserId;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -56,7 +57,8 @@ final class RedisCartRepository implements CartRepository
     {
         return new Cart(
             new CartId($cart['id']['value']),
-            $this->hydrateCartLines($cart['cartLines'])
+            $this->hydrateCartLines($cart['cartLines']),
+            isset($cart['userId']['value']) ? new UserId($cart['userId']['value']) : null
         );
     }
 
