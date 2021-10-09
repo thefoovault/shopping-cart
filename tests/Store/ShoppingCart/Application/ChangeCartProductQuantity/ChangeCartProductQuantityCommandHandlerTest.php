@@ -12,6 +12,7 @@ use Store\ShoppingCart\Domain\Cart\CartRepository;
 use Store\ShoppingCart\Domain\Cart\Exception\CartNotFound;
 use Store\ShoppingCart\Domain\Cart\Exception\ProductNotFoundInCart;
 use Store\ShoppingCart\Domain\CartLine\CartLineQuantity;
+use Store\ShoppingCart\Domain\CartLine\Exception\InvalidQuantity;
 use Test\Store\ShoppingCart\Domain\Cart\CartMother;
 use Test\Store\ShoppingCart\Domain\Product\ProductMother;
 
@@ -105,6 +106,23 @@ final class ChangeCartProductQuantityCommandHandlerTest extends TestCase
                 $cart->id()->value(),
                 $product->id()->value(),
                 2
+            )
+        );
+    }
+
+    /** @test */
+    public function shouldThrowInvalidQuantityException(): void
+    {
+        $this->expectException(InvalidQuantity::class);
+
+        $cart = CartMother::randomEmptyCart();
+        $product = ProductMother::random();
+
+        $this->changeCartProductQuantityCommandHandler->__invoke(
+            new ChangeCartProductQuantityCommand(
+                $cart->id()->value(),
+                $product->id()->value(),
+                -1
             )
         );
     }

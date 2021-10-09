@@ -74,7 +74,7 @@ final class AddProductToCartCommandHandlerTest extends TestCase
     /** @test */
     public function shouldAddAnExistingProductToACart(): void
     {
-        $cart = CartMother::random();
+        $cart = CartMother::randomEmptyCart();
         $cartLine = CartLineMother::random();
         $cart->addProduct($cartLine->product(), $cartLine->quantity());
 
