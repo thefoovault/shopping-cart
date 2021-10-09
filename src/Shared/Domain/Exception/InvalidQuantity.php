@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Store\ShoppingCart\Domain\CartLine\Exception;
-
-use Shared\Domain\Exception\DomainError;
+namespace Shared\Domain\Exception;
 
 final class InvalidQuantity extends DomainError
 {

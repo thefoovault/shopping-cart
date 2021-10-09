@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Test\Store\ShoppingCart\Application\ChangeCartProductQuantity;
 
 use PHPUnit\Framework\TestCase;
+use Shared\Domain\Exception\InvalidQuantity;
 use Store\ShoppingCart\Application\ChangeCartProductQuantity\ChangeCartProductQuantity;
 use Store\ShoppingCart\Application\ChangeCartProductQuantity\ChangeCartProductQuantityCommand;
 use Store\ShoppingCart\Application\ChangeCartProductQuantity\ChangeCartProductQuantityCommandHandler;
@@ -12,7 +13,6 @@ use Store\ShoppingCart\Domain\Cart\CartRepository;
 use Store\ShoppingCart\Domain\Cart\Exception\CartNotFound;
 use Store\ShoppingCart\Domain\Cart\Exception\ProductNotFoundInCart;
 use Store\ShoppingCart\Domain\CartLine\CartLineQuantity;
-use Store\ShoppingCart\Domain\CartLine\Exception\InvalidQuantity;
 use Test\Store\ShoppingCart\Domain\Cart\CartMother;
 use Test\Store\ShoppingCart\Domain\Product\ProductMother;
 

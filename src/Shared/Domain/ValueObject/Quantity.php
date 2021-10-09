@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Shared\Domain\ValueObject;
 
-use Store\ShoppingCart\Domain\CartLine\Exception\InvalidQuantity;
+use Shared\Domain\Exception\InvalidQuantity;
 
 abstract class Quantity extends IntegerValueObject
 {
