@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Store\Accounting\Domain\Order;
 
 use Shared\Domain\Aggregate\AggregateRoot;
+use Store\Accounting\Domain\Order\Exception\EmptyOrderLines;
 use Store\Accounting\Domain\Order\Exception\OrderEmptyUser;
 use Store\Accounting\Domain\OrderLine\OrderLine;
 use Store\Accounting\Domain\OrderLine\OrderLineQuantity;
@@ -31,6 +32,7 @@ final class Order extends AggregateRoot
     public static function createFromCart(Cart $cart): self
     {
         self::assertExistingUser($cart->userId());
+        self::assertNotEmptyLines($cart->cartLines());
 
         return new self(
             OrderId::random(),
@@ -45,6 +47,13 @@ final class Order extends AggregateRoot
     {
         if (null === $userId) {
             throw new OrderEmptyUser();
+        }
+    }
+
+    private static function assertNotEmptyLines(CartLines $cartLines): void
+    {
+        if ($cartLines->count() === 0) {
+            throw new EmptyOrderLines();
         }
     }
 
