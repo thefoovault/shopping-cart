@@ -12,16 +12,20 @@ final class CartResponse implements QueryResponse
 {
     public function __construct(
         private string $id,
+        private ?string $userId,
         private array $cartLines,
-        private float $totalAmount
+        private float $totalAmount,
+        private int $totalNumberProducts
     ) {}
 
     public static function createFromCart(Cart $cart): self
     {
         return new self(
             $cart->id()->value(),
+            $cart->userId() ? $cart->userId()->value() : null,
             self::createCartLines($cart->cartLines()),
-            $cart->totalAmount()->value()
+            $cart->totalAmount()->value(),
+            $cart->totalNumberProducts()->value()
         );
     }
 
@@ -40,6 +44,11 @@ final class CartResponse implements QueryResponse
         return $this->id;
     }
 
+    public function userId(): ?string
+    {
+        return $this->userId;
+    }
+
     public function cartLines(): array
     {
         return $this->cartLines;
@@ -48,5 +57,10 @@ final class CartResponse implements QueryResponse
     public function totalAmount(): float
     {
         return $this->totalAmount;
+    }
+
+    public function totalNumberProducts(): int
+    {
+        return $this->totalNumberProducts;
     }
 }

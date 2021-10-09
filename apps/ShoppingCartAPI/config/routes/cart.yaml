@@ -13,6 +13,11 @@ addProductToCart:
     controller: ShoppingCartAPI\Controller\AddProductToCartController
     methods: [POST]
 
+removeProductToCart:
+    path: /api/carts/{id}/items/{productId}
+    controller: ShoppingCartAPI\Controller\RemoveProductFromCartController
+    methods: [DELETE]
+
 deleteCart:
     path: /api/carts/{id}
     controller: ShoppingCartAPI\Controller\DeleteCartController

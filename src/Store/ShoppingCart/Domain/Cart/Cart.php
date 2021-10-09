@@ -18,6 +18,7 @@ final class Cart extends AggregateRoot
     private const MAX_CART_LINES = 5;
 
     private CartTotalAmount $totalAmount;
+    private CartTotalNumberProducts $totalQuantity;
 
     public function __construct(
         private CartId $id,
@@ -25,6 +26,7 @@ final class Cart extends AggregateRoot
         private ?UserId $userId = null
     ) {
         $this->totalAmount = $this->calculateTotalAmount();
+        $this->totalQuantity = $this->calculateTotalNumberProducts();
     }
 
     public function addProduct(Product $product, CartLineQuantity $lineQuantity): void
@@ -42,15 +44,22 @@ final class Cart extends AggregateRoot
         }
 
         $this->totalAmount = $this->calculateTotalAmount();
+        $this->totalQuantity = $this->calculateTotalNumberProducts();
+    }
+
+    public function removeProduct(ProductId $productId): void
+    {
+        $cartLine = $this->cartLines()->findLineByProductId($productId);
+        $this->assertProductFoundInCart($cartLine, $productId);
+
+        $this->cartLines()->remove($productId);
     }
 
     public function changeProductQuantity(ProductId $productId, CartLineQuantity $cartLineQuantity): void
     {
         $cartLine = $this->cartLines()->findLineByProductId($productId);
 
-        if (null === $cartLine) {
-            throw new ProductNotFoundInCart($this->id(), $productId);
-        }
+        $this->assertProductFoundInCart($cartLine, $productId);
 
         $cartLine->changeQuantity($cartLineQuantity);
 
@@ -77,6 +86,11 @@ final class Cart extends AggregateRoot
         return $this->totalAmount;
     }
 
+    public function totalNumberProducts(): CartTotalNumberProducts
+    {
+        return $this->totalQuantity;
+    }
+
     private function assertCartIsNotFull(): void
     {
         if ($this->cartLines()->count() >= self::MAX_CART_LINES) {
@@ -94,5 +108,24 @@ final class Cart extends AggregateRoot
         }
 
         return $totalAmount;
+    }
+
+    private function calculateTotalNumberProducts(): CartTotalNumberProducts
+    {
+        $totalQuantity = new CartTotalNumberProducts(0);
+
+        /** @var CartLine $cartLine */
+        foreach ($this->cartLines() as $cartLine) {
+            $totalQuantity = $totalQuantity->add($cartLine->quantity());
+        }
+
+        return $totalQuantity;
+    }
+
+    private function assertProductFoundInCart(?CartLine $cartLine, ProductId $productId): void
+    {
+        if (null === $cartLine) {
+            throw new ProductNotFoundInCart($this->id(), $productId);
+        }
     }
 }

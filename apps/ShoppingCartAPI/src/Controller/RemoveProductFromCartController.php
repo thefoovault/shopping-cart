@@ -5,22 +5,23 @@ declare(strict_types=1);
 namespace ShoppingCartAPI\Controller;
 
 use Shared\Infrastructure\Symfony\Controller\ApiController;
-use Store\Accounting\Domain\Order\Exception\EmptyOrderLines;
-use Store\Accounting\Domain\Order\Exception\OrderEmptyUser;
-use Store\ShoppingCart\Application\CheckoutCart\CheckoutCartCommand;
+use Store\ShoppingCart\Application\DeleteProductFromCart\DeleteProductFromCartCommand;
 use Store\ShoppingCart\Domain\Cart\Exception\CartNotFound;
+use Store\ShoppingCart\Domain\Cart\Exception\ProductNotFoundInCart;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-final class CheckoutCartController extends ApiController
+final class RemoveProductFromCartController extends ApiController
 {
     public function __invoke(Request $request): Response
     {
         $id = $request->attributes->get('id');
+        $productId = $request->attributes->get('productId');
 
         $this->dispatch(
-            new CheckoutCartCommand(
-                $id
+            new DeleteProductFromCartCommand(
+                $id,
+                $productId
             )
         );
 
@@ -31,8 +32,7 @@ final class CheckoutCartController extends ApiController
     {
         return [
             CartNotFound::class => Response::HTTP_NOT_FOUND,
-            OrderEmptyUser::class => Response::HTTP_BAD_REQUEST,
-            EmptyOrderLines::class => Response::HTTP_BAD_REQUEST
+            ProductNotFoundInCart::class => Response::HTTP_NOT_FOUND
         ];
     }
 }

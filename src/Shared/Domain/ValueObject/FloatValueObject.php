@@ -8,7 +8,9 @@ abstract class FloatValueObject
 {
     public function __construct(
         protected float $value
-    ){}
+    ){
+        $this->value = (float) number_format($this->value, 2);
+    }
 
     public function value(): float
     {
