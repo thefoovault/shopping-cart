@@ -8,17 +8,20 @@ use Store\ShoppingCart\Domain\Cart\Cart;
 use Store\ShoppingCart\Domain\Cart\CartId;
 use Store\ShoppingCart\Domain\Cart\CartLines;
 use Store\ShoppingCart\Domain\Cart\CartTotalAmount;
+use Store\Users\Domain\User\UserId;
 
 final class CartMother
 {
     public static function create(
         CartId $cartId,
-        CartLines $cartLines
+        CartLines $cartLines,
+        ?UserId $userId = null
     ): Cart
     {
         return new Cart(
             $cartId,
-            $cartLines
+            $cartLines,
+            $userId
         );
     }
 
@@ -26,7 +29,8 @@ final class CartMother
     {
         return self::create(
             CartIdMother::random(),
-            CartLinesMother::random()
+            CartLinesMother::random(),
+            UserId::random()
         );
     }
 
@@ -34,7 +38,16 @@ final class CartMother
     {
         return self::create(
             CartIdMother::random(),
-            CartLinesMother::create([])
+            CartLinesMother::create([]),
+            UserId::random()
+        );
+    }
+
+    public static function randomEmptyUser(): Cart
+    {
+        return self::create(
+            CartIdMother::random(),
+            CartLinesMother::fullCartLines()
         );
     }
 

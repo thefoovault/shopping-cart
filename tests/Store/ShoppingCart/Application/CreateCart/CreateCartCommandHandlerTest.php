@@ -43,7 +43,7 @@ final class CreateCartCommandHandlerTest extends TestCase
             ->with($cart);
 
         $this->createCartCommandHandler->__invoke(
-            new CreateCartCommand($cart->id()->value())
+            new CreateCartCommand($cart->id()->value(), $cart->userId()->value())
         );
     }
 }
