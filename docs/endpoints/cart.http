@@ -2,7 +2,7 @@
 POST {{url}}/api/carts
 
 {
-  "userId": null
+  "userId": "{{userId}}"
 }
 
 ###
