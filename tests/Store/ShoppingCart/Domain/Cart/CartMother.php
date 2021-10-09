@@ -51,7 +51,7 @@ final class CartMother
         );
     }
 
-    public static function fullCart(): Cart
+    public static function randomFullCart(): Cart
     {
         return self::create(
             CartIdMother::random(),

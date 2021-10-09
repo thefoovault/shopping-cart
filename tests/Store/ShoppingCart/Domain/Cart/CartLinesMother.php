@@ -20,9 +20,9 @@ final class CartLinesMother
     public static function random(): CartLines
     {
         $randomLines = [];
-        $numLines = Factory::create()->numberBetween(self::MIN_ALLOWED_LINES, self::MAX_ALLOWED_LINES);
+        $numLines = Factory::create()->numberBetween(self::MIN_ALLOWED_LINES, self::MAX_ALLOWED_LINES-1);
 
-        for($i = 0; $i < $numLines-1; $i++) {
+        for($i = 0; $i < $numLines; $i++) {
             $randomLines[] = CartLineMother::random();
         }
 

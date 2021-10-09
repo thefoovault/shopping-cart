@@ -72,11 +72,43 @@ final class AddProductToCartCommandHandlerTest extends TestCase
     }
 
     /** @test */
+    public function shouldAddAnExistingProductToACart(): void
+    {
+        $cart = CartMother::random();
+        $cartLine = CartLineMother::random();
+        $cart->addProduct($cartLine->product(), $cartLine->quantity());
+
+        $this->cartRepository
+            ->expects(self::once())
+            ->method('findById')
+            ->with($cart->id())
+            ->willReturn($cart);
+
+        $this->productRepository
+            ->expects(self::once())
+            ->method('findById')
+            ->with($cartLine->product()->id())
+            ->willReturn($cartLine->product());
+
+        $this->cartRepository
+            ->expects(self::once())
+            ->method('save');
+
+        $this->addProductToCartCommandHandler->__invoke(
+            new AddProductToCartCommand(
+                $cart->id()->value(),
+                $cartLine->product()->id()->value(),
+                1
+            )
+        );
+    }
+
+    /** @test */
     public function shouldThrowCartNotFoundException(): void
     {
         $this->expectException(CartNotFound::class);
 
-        $cart = CartMother::fullCart();
+        $cart = CartMother::randomFullCart();
         $cartLine = CartLineMother::random();
 
         $this->cartRepository
@@ -99,7 +131,7 @@ final class AddProductToCartCommandHandlerTest extends TestCase
     {
         $this->expectException(ProductNotFound::class);
 
-        $cart = CartMother::fullCart();
+        $cart = CartMother::randomFullCart();
         $cartLine = CartLineMother::random();
 
         $this->cartRepository
@@ -128,7 +160,7 @@ final class AddProductToCartCommandHandlerTest extends TestCase
     {
         $this->expectException(FullCart::class);
 
-        $cart = CartMother::fullCart();
+        $cart = CartMother::randomFullCart();
         $cartLine = CartLineMother::random();
 
         $this->cartRepository
