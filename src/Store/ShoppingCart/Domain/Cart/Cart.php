@@ -47,13 +47,19 @@ final class Cart extends AggregateRoot
         $this->totalQuantity = $this->calculateTotalNumberProducts();
     }
 
+    public function removeProduct(ProductId $productId): void
+    {
+        $cartLine = $this->cartLines()->findLineByProductId($productId);
+        $this->assertProductFoundInCart($cartLine, $productId);
+
+        $this->cartLines()->remove($productId);
+    }
+
     public function changeProductQuantity(ProductId $productId, CartLineQuantity $cartLineQuantity): void
     {
         $cartLine = $this->cartLines()->findLineByProductId($productId);
 
-        if (null === $cartLine) {
-            throw new ProductNotFoundInCart($this->id(), $productId);
-        }
+        $this->assertProductFoundInCart($cartLine, $productId);
 
         $cartLine->changeQuantity($cartLineQuantity);
 
@@ -114,5 +120,16 @@ final class Cart extends AggregateRoot
         }
 
         return $totalQuantity;
+    }
+
+    /**
+     * @param CartLine|null $cartLine
+     * @param ProductId $productId
+     */
+    private function assertProductFoundInCart(?CartLine $cartLine, ProductId $productId): void
+    {
+        if (null === $cartLine) {
+            throw new ProductNotFoundInCart($this->id(), $productId);
+        }
     }
 }

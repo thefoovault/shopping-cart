@@ -19,6 +19,13 @@ POST {{url}}/api/carts/{{cartId}}
 }
 
 ###
+# Remove a product from cart
+DELETE {{url}}/api/carts/{{cartId}}/items/{{productId}}
+
+{
+}
+
+###
 # Change cart line quantity
 PATCH {{url}}/api/carts/{{cartId}}/items/{{productId}}
 
