@@ -26,7 +26,7 @@ final class Cart extends AggregateRoot
         private ?UserId $userId = null
     ) {
         $this->totalAmount = $this->calculateTotalAmount();
-        $this->totalQuantity = $this->calculateTotalQuantity();
+        $this->totalQuantity = $this->calculateTotalNumberProducts();
     }
 
     public function addProduct(Product $product, CartLineQuantity $lineQuantity): void
@@ -44,7 +44,7 @@ final class Cart extends AggregateRoot
         }
 
         $this->totalAmount = $this->calculateTotalAmount();
-        $this->totalQuantity = $this->calculateTotalQuantity();
+        $this->totalQuantity = $this->calculateTotalNumberProducts();
     }
 
     public function changeProductQuantity(ProductId $productId, CartLineQuantity $cartLineQuantity): void
@@ -80,7 +80,7 @@ final class Cart extends AggregateRoot
         return $this->totalAmount;
     }
 
-    public function totalQuantity(): CartTotalNumberProducts
+    public function totalNumberProducts(): CartTotalNumberProducts
     {
         return $this->totalQuantity;
     }
@@ -98,19 +98,19 @@ final class Cart extends AggregateRoot
 
         /** @var CartLine $cartLine */
         foreach ($this->cartLines() as $cartLine) {
-            $totalAmount->add($cartLine->amount());
+            $totalAmount = $totalAmount->add($cartLine->amount());
         }
 
         return $totalAmount;
     }
 
-    private function calculateTotalQuantity(): CartTotalNumberProducts
+    private function calculateTotalNumberProducts(): CartTotalNumberProducts
     {
         $totalQuantity = new CartTotalNumberProducts(0);
 
         /** @var CartLine $cartLine */
         foreach ($this->cartLines() as $cartLine) {
-            $totalQuantity->add($cartLine->quantity());
+            $totalQuantity = $totalQuantity->add($cartLine->quantity());
         }
 
         return $totalQuantity;
