@@ -11,7 +11,7 @@ status:
 	@docker-compose ps
 
 ## build:		Start container and install packages
-build: build-container start hooks composer-install
+build: build-container start hooks composer-install migrations
 
 ## build-container:Rebuild a container
 build-container:
@@ -52,3 +52,6 @@ run-tests:
 hooks:
 	rm -rf .git/hooks
 	ln -s ../docs/git/hooks-docker .git/hooks
+
+migrations:
+	@docker-compose exec php_container php apps/ShoppingCartAPI/bin/console doctrine:migrations:migrate --no-interaction

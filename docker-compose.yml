@@ -12,6 +12,8 @@ services:
     working_dir: /app
     ports:
       - 9001:9000
+    depends_on:
+      - mysql_container
 
   nginx_container:
     image: nginx:latest
@@ -26,6 +28,7 @@ services:
 
   redis_container:
     image: redis
+    container_name: redis_container
     ports:
       - ${REDIS_PORT}:6379
     expose:
@@ -41,3 +44,19 @@ services:
       - ./var/redisinsight:/db
     depends_on:
       - redis_container
+
+  mysql_container:
+    image: mysql:8.0
+    container_name: mysql_container
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DATABASE_NAME}
+      MYSQL_USER: ${DATABASE_USER}
+      MYSQL_PASSWORD: ${DATABASE_PASSWD}
+      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWD}
+    ports:
+      - 3306:${DATABASE_PORT}
+    expose:
+      - ${DATABASE_PORT}
+    volumes:
+      - ./var/MySQL:/var/lib/mysql

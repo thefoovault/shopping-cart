@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace ShoppingCartAPI\Controller;
 
 use Shared\Infrastructure\Symfony\Controller\ApiController;
-use ShoppingCart\Application\DeleteCart\DeleteCartCommand;
-use ShoppingCart\Domain\Cart\Exception\CartNotFound;
+use Store\ShoppingCart\Application\DeleteCart\DeleteCartCommand;
+use Store\ShoppingCart\Domain\Cart\Exception\CartNotFound;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

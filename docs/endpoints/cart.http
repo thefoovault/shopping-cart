@@ -2,6 +2,7 @@
 POST {{url}}/api/carts
 
 {
+  "userId": "{{userId}}"
 }
 
 ###
@@ -29,3 +30,9 @@ PATCH {{url}}/api/carts/{{cartId}}/items/{{productId}}
 # Delete a cart
 DELETE {{url}}/api/carts/{{cartId}}
 
+###
+# Checkout cart
+POST {{url}}/api/carts/{{cartId}}/checkout
+
+{
+}

@@ -6,11 +6,11 @@ namespace ShoppingCartAPI\Controller;
 
 use Shared\Domain\Exception\InvalidUuid;
 use Shared\Infrastructure\Symfony\Controller\ApiController;
-use ShoppingCart\Application\AddProductToCart\AddProductToCartCommand;
-use ShoppingCart\Domain\Cart\Exception\CartNotFound;
-use ShoppingCart\Domain\Cart\Exception\FullCart;
-use ShoppingCart\Domain\CartLine\Exception\InvalidQuantity;
-use ShoppingCart\Domain\Product\Exception\ProductNotFound;
+use Store\ShoppingCart\Application\AddProductToCart\AddProductToCartCommand;
+use Store\ShoppingCart\Domain\Cart\Exception\CartNotFound;
+use Store\ShoppingCart\Domain\Cart\Exception\FullCart;
+use Store\ShoppingCart\Domain\CartLine\Exception\InvalidQuantity;
+use Store\ShoppingCart\Domain\Product\Exception\ProductNotFound;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
