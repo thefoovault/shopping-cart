@@ -122,10 +122,6 @@ final class Cart extends AggregateRoot
         return $totalQuantity;
     }
 
-    /**
-     * @param CartLine|null $cartLine
-     * @param ProductId $productId
-     */
     private function assertProductFoundInCart(?CartLine $cartLine, ProductId $productId): void
     {
         if (null === $cartLine) {
