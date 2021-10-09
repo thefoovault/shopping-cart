@@ -18,6 +18,7 @@ final class Cart extends AggregateRoot
     private const MAX_CART_LINES = 5;
 
     private CartTotalAmount $totalAmount;
+    private CartTotalNumberProducts $totalQuantity;
 
     public function __construct(
         private CartId $id,
@@ -25,6 +26,7 @@ final class Cart extends AggregateRoot
         private ?UserId $userId = null
     ) {
         $this->totalAmount = $this->calculateTotalAmount();
+        $this->totalQuantity = $this->calculateTotalQuantity();
     }
 
     public function addProduct(Product $product, CartLineQuantity $lineQuantity): void
@@ -42,6 +44,7 @@ final class Cart extends AggregateRoot
         }
 
         $this->totalAmount = $this->calculateTotalAmount();
+        $this->totalQuantity = $this->calculateTotalQuantity();
     }
 
     public function changeProductQuantity(ProductId $productId, CartLineQuantity $cartLineQuantity): void
@@ -77,6 +80,11 @@ final class Cart extends AggregateRoot
         return $this->totalAmount;
     }
 
+    public function totalQuantity(): CartTotalNumberProducts
+    {
+        return $this->totalQuantity;
+    }
+
     private function assertCartIsNotFull(): void
     {
         if ($this->cartLines()->count() >= self::MAX_CART_LINES) {
@@ -90,9 +98,21 @@ final class Cart extends AggregateRoot
 
         /** @var CartLine $cartLine */
         foreach ($this->cartLines() as $cartLine) {
-            $totalAmount = $totalAmount->add($cartLine->amount());
+            $totalAmount->add($cartLine->amount());
         }
 
         return $totalAmount;
+    }
+
+    private function calculateTotalQuantity(): CartTotalNumberProducts
+    {
+        $totalQuantity = new CartTotalNumberProducts(0);
+
+        /** @var CartLine $cartLine */
+        foreach ($this->cartLines() as $cartLine) {
+            $totalQuantity->add($cartLine->quantity());
+        }
+
+        return $totalQuantity;
     }
 }
