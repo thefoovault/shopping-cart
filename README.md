@@ -27,6 +27,7 @@ Simply execute `make test` to run all unit and integration tests. Please note th
 | /api/carts   | POST | Creates an empty cart                                                                                                                    |
 | /api/carts/{id}   | GET | Gets a cart                                                                                                                    |
 | /api/carts/{id}   | POST | Adds a product to a specific cart                                                                                                                    |
+| /api/carts/{id}/items/{productId}   | DELETE | Deletes a product from a specific cart                                                                                                                    |
 | /api/carts/{id}   | DELETE | Deletes a cart                                                                                                                    |
 | /api/carts/{id}/items/{productId}   | PATCH | Changes product quantity in a specific cart                                                                                                                    |
 | /api/carts/{id}/checkout   | POST | Checkout cart                                                                                                                    |
