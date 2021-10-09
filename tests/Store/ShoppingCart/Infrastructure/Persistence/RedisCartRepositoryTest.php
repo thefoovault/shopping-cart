@@ -51,8 +51,16 @@ final class RedisCartRepositoryTest extends RedisTestCase
 
         $cart = $this->cartRepository->findById($this->cartId);
 
-        $this->assertInstanceOf(Cart::class, $sampleCart);
+        $this->assertInstanceOf(Cart::class, $cart);
         $this->assertEquals($sampleCart, $cart);
+    }
+
+    /** @test */
+    public function shouldGetAnEmptyCart(): void
+    {
+        $cart = $this->cartRepository->findById(CartId::random());
+
+        $this->assertNull($cart);
     }
 
     /** @test */
