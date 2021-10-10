@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Store\ShoppingCart\Application\GetCart;
 
-use Shared\Application\AssertionTrait;
+use Shared\Application\AssertionShoppingCartTrait;
 use Store\ShoppingCart\Domain\Cart\Cart;
 use Store\ShoppingCart\Domain\Cart\CartId;
 use Store\ShoppingCart\Domain\Cart\CartRepository;
 
 final class GetCart
 {
-    use AssertionTrait;
+    use AssertionShoppingCartTrait;
 
     public function __construct(
         private CartRepository $cartRepository
