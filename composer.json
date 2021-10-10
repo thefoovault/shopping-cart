@@ -1,5 +1,5 @@
 {
-  "name": "thefoovault/sf-skeleton",
+  "name": "thefoovault/shopping-cart",
   "autoload": {
     "psr-4": {
       "Store\\": "src/Store",

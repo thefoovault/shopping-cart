@@ -35,7 +35,7 @@ final class DeleteCartCommandHandlerTest extends TestCase
     }
 
     /** @test */
-    public function shouldCreateACart(): void
+    public function shouldDeleteACart(): void
     {
         $cart = CartMother::random();
 

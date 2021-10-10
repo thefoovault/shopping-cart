@@ -11,7 +11,7 @@ use Store\ShoppingCart\Domain\Product\Exception\ProductNotFound;
 use Store\ShoppingCart\Domain\Product\Product;
 use Store\ShoppingCart\Domain\Product\ProductId;
 
-trait AssertionTrait
+trait AssertionShoppingCartTrait
 {
     private function assertCartExists(?Cart $cart, CartId $cartId): void
     {

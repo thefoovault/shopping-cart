@@ -24,6 +24,7 @@ final class RedisCartRepository implements CartRepository
 {
     private const DEFAULT_TTL = 60 * 60 * 24;
     private const REDIS_CART_KEY = 'cart:id:';
+    private const EXPIRE_RESOLUTION = 'EX';
 
     public function __construct(
         private Client $connection,
@@ -35,7 +36,7 @@ final class RedisCartRepository implements CartRepository
         $this->connection->set(
             self::REDIS_CART_KEY . $cart->id()->value(),
             $this->serializer->serialize($cart, JsonEncoder::FORMAT),
-            'EX',
+            self::EXPIRE_RESOLUTION,
             self::DEFAULT_TTL
         );
     }

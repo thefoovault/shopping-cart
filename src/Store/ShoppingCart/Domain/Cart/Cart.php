@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Store\ShoppingCart\Domain\Cart;
 
 use Shared\Domain\Aggregate\AggregateRoot;
-use Store\ShoppingCart\Domain\Cart\Exception\FullCart;
+use Store\ShoppingCart\Domain\Cart\Exception\CartIsFull;
 use Store\ShoppingCart\Domain\Cart\Exception\ProductNotFoundInCart;
 use Store\ShoppingCart\Domain\CartLine\CartLine;
 use Store\ShoppingCart\Domain\CartLine\CartLineQuantity;
@@ -38,8 +38,8 @@ final class Cart extends AggregateRoot
             $cartLine = CartLine::create($product, $lineQuantity);
             $this->cartLines->add($cartLine);
         } else {
-            $cartLine->changeQuantity(
-                $cartLine->incrementLineQuantity($lineQuantity)
+            $cartLine->changeProductQuantity(
+                $cartLine->incrementProductQuantity($lineQuantity)
             );
         }
 
@@ -61,7 +61,7 @@ final class Cart extends AggregateRoot
 
         $this->assertProductFoundInCart($cartLine, $productId);
 
-        $cartLine->changeQuantity($cartLineQuantity);
+        $cartLine->changeProductQuantity($cartLineQuantity);
 
         $this->totalAmount = $this->calculateTotalAmount();
     }
@@ -94,7 +94,7 @@ final class Cart extends AggregateRoot
     private function assertCartIsNotFull(): void
     {
         if ($this->cartLines()->count() >= self::MAX_CART_LINES) {
-            throw new FullCart($this->id());
+            throw new CartIsFull($this->id());
         }
     }
 

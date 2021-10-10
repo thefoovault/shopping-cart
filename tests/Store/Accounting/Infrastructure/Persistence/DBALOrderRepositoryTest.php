@@ -19,7 +19,7 @@ final class DBALOrderRepositoryTest extends DBALTestCase
     }
 
     /** @test */
-    public function itShouldSaveAnOrder(): void
+    public function shouldSaveAnOrder(): void
     {
         $order = OrderMother::random();
 
