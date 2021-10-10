@@ -40,7 +40,7 @@ final class DeleteProductFromCartCommandHandlerTest extends TestCase
     }
 
     /** @test */
-    public function shouldDeleteACart(): void
+    public function shouldDeleteAProductFromCart(): void
     {
         $cart = CartMother::randomEmptyCart();
         $cartLine = CartLineMother::random();

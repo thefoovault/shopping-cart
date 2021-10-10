@@ -11,6 +11,8 @@ use Store\ShoppingCart\Application\GetCart\GetCart;
 use Store\ShoppingCart\Application\GetCart\GetCartQuery;
 use Store\ShoppingCart\Application\GetCart\GetCartQueryHandler;
 use Store\ShoppingCart\Domain\Cart\CartRepository;
+use Store\ShoppingCart\Domain\Cart\Exception\CartNotFound;
+use Test\Store\ShoppingCart\Domain\Cart\CartIdMother;
 use Test\Store\ShoppingCart\Domain\Cart\CartMother;
 
 final class GetCartQueryHandlerTest extends TestCase
@@ -55,5 +57,23 @@ final class GetCartQueryHandlerTest extends TestCase
         $this->assertEquals($expectedResponse->totalAmount(), $response->totalAmount());
         $this->assertCount(count($expectedResponse->cartLines()), $response->cartLines());
         $this->assertContainsOnlyInstancesOf(CartLineResponse::class, $response->cartLines());
+    }
+
+    /** @test */
+    public function shouldThrowCartNotFoundException(): void
+    {
+        $this->expectException(CartNotFound::class);
+
+        $cartId = CartIdMother::random();
+
+        $this->cartRepository
+            ->expects(self::once())
+            ->method('findById')
+            ->with($cartId)
+            ->willReturn(null);
+
+        $this->getCartQueryHandler->__invoke(
+            new GetCartQuery($cartId->value())
+        );
     }
 }
