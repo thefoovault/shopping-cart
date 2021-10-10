@@ -27,7 +27,20 @@ Simply execute `make test` to run all unit and integration tests. Please note th
 | /api/carts   | POST | Creates an empty cart                                                                                                                    |
 | /api/carts/{id}   | GET | Gets a cart                                                                                                                    |
 | /api/carts/{id}   | POST | Adds a product to a specific cart                                                                                                                    |
+| /api/carts/{id}/items/{productId}   | PATCH | Changes product quantity in a specific cart                                                                                                                    |
 | /api/carts/{id}/items/{productId}   | DELETE | Deletes a product from a specific cart                                                                                                                    |
 | /api/carts/{id}   | DELETE | Deletes a cart                                                                                                                    |
-| /api/carts/{id}/items/{productId}   | PATCH | Changes product quantity in a specific cart                                                                                                                    |
 | /api/carts/{id}/checkout   | POST | Checkout cart                                                                                                                    |
+
+# Behind the scenes
+
+I have used Redis to save carts because it has a very good performance due to its very low read/write operations latency and high availability and scalability.
+
+To save orders, I have used MySQL because the persistence and reliability was necessary. 
+
+I used DBAL instead Doctrine ORM to avoid some ORM configuration problems and to ensure the responsibility segregation between layers.
+
+# TODO list
+
+- Replace InMemoryProductRepository to DBALProductRepository
+- A better README
