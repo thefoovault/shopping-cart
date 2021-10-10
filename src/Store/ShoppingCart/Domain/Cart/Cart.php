@@ -38,8 +38,8 @@ final class Cart extends AggregateRoot
             $cartLine = CartLine::create($product, $lineQuantity);
             $this->cartLines->add($cartLine);
         } else {
-            $cartLine->changeQuantity(
-                $cartLine->incrementLineQuantity($lineQuantity)
+            $cartLine->changeProductQuantity(
+                $cartLine->incrementProductQuantity($lineQuantity)
             );
         }
 
@@ -61,7 +61,7 @@ final class Cart extends AggregateRoot
 
         $this->assertProductFoundInCart($cartLine, $productId);
 
-        $cartLine->changeQuantity($cartLineQuantity);
+        $cartLine->changeProductQuantity($cartLineQuantity);
 
         $this->totalAmount = $this->calculateTotalAmount();
     }
