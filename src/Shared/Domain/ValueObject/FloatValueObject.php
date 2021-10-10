@@ -7,9 +7,10 @@ namespace Shared\Domain\ValueObject;
 abstract class FloatValueObject
 {
     public function __construct(
-        protected float $value
-    ){
-        $this->value = (float) number_format($this->value, 2);
+        protected float $value,
+        protected int $decimals = 2
+    ) {
+        $this->value = (float) number_format($this->value, $this->decimals);
     }
 
     public function value(): float
