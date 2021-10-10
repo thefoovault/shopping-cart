@@ -10,7 +10,7 @@ use Store\ShoppingCart\Application\AddProductToCart\AddProductToCartCommand;
 use Store\ShoppingCart\Application\AddProductToCart\AddProductToCartCommandHandler;
 use Store\ShoppingCart\Domain\Cart\CartRepository;
 use Store\ShoppingCart\Domain\Cart\Exception\CartNotFound;
-use Store\ShoppingCart\Domain\Cart\Exception\FullCart;
+use Store\ShoppingCart\Domain\Cart\Exception\CartIsFull;
 use Store\ShoppingCart\Domain\Product\Exception\ProductNotFound;
 use Store\ShoppingCart\Domain\Product\ProductRepository;
 use Test\Store\ShoppingCart\Domain\Cart\CartMother;
@@ -158,7 +158,7 @@ final class AddProductToCartCommandHandlerTest extends TestCase
     /** @test */
     public function shouldThrowFullCartException(): void
     {
-        $this->expectException(FullCart::class);
+        $this->expectException(CartIsFull::class);
 
         $cart = CartMother::randomFullCart();
         $cartLine = CartLineMother::random();

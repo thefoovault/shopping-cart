@@ -7,7 +7,7 @@ namespace Store\ShoppingCart\Domain\Cart\Exception;
 use Shared\Domain\Exception\DomainError;
 use Store\ShoppingCart\Domain\Cart\CartId;
 
-final class FullCart extends DomainError
+final class CartIsFull extends DomainError
 {
     private CartId $cartId;
 

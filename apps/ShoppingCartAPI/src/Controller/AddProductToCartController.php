@@ -8,7 +8,7 @@ use Shared\Domain\Exception\InvalidUuid;
 use Shared\Infrastructure\Symfony\Controller\ApiController;
 use Store\ShoppingCart\Application\AddProductToCart\AddProductToCartCommand;
 use Store\ShoppingCart\Domain\Cart\Exception\CartNotFound;
-use Store\ShoppingCart\Domain\Cart\Exception\FullCart;
+use Store\ShoppingCart\Domain\Cart\Exception\CartIsFull;
 use Store\ShoppingCart\Domain\CartLine\Exception\InvalidQuantity;
 use Store\ShoppingCart\Domain\Product\Exception\ProductNotFound;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,7 +37,7 @@ final class AddProductToCartController extends ApiController
         return [
             CartNotFound::class => Response::HTTP_NOT_FOUND,
             ProductNotFound::class => Response::HTTP_NOT_FOUND,
-            FullCart::class => Response::HTTP_BAD_REQUEST,
+            CartIsFull::class => Response::HTTP_BAD_REQUEST,
             InvalidUuid::class => Response::HTTP_BAD_REQUEST,
             InvalidQuantity::class => Response::HTTP_BAD_REQUEST,
         ];
